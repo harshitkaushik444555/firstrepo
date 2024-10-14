@@ -2,23 +2,34 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Building the application...'
-                sh 'make build'  // Running a shell command
+                script {
+                    // Define the image name
+                    def imageName = "harshit-image"
+                    
+                    // Build the Docker image
+                    sh "docker build -t ${imageName} ."
+                }
             }
         }
-        stage('Test') {
+
+        stage('Run Docker Container') {
             steps {
-                echo 'Running tests...'
-                sh 'make test'  // Running tests
+                script {
+                    // Run the Docker container
+                    sh "docker run -d --name harshit-ka-container ${imageName}"
+                }
             }
         }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying the application...'
-                sh 'make deploy'  // Deploy command
-            }
+    }
+
+    post {
+        always {
+            // Clean up any resources, if needed
+            echo 'Cleaning up...'
+            sh "docker rm -f harshit-ka-container || true"
+            sh "docker rmi harshit-image || true"
         }
     }
 }
