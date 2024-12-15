@@ -1,21 +1,22 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('Checkout Code') {
             steps {
-                echo 'Harshit is Building the project...'
-                sh '''
-                    echo "Hello, Jenkins Pipeline!"
-                    mkdir -p output
-                    echo "This is a simple shell script." > output/result.txt
-                    cat output/result.txt
-                '''
+                echo 'Cloning the repository...'
+                checkout scm
             }
         }
-        stage('Test') {
+        stage('Compile Java Code') {
             steps {
-                echo 'Testing the project...'
-                
+                echo 'Compiling Java HelloWorld program...'
+                sh 'javac HelloWorld.java'
+            }
+        }
+        stage('Run Java Program') {
+            steps {
+                echo 'Running the Java program...'
+                sh 'java HelloWorld'
             }
         }
     }
