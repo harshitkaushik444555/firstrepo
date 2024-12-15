@@ -11,6 +11,10 @@ pipeline {
                 checkout scm
             }
         }
+        stage('Check Workspace') {
+            steps {
+                sh 'ls -l'
+            } 
         stage('Compile Java Code') {
             steps {
                 echo 'Compiling Java HelloWorld program...'
