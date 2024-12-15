@@ -19,7 +19,9 @@ pipeline {
         stage('Compile Java Code') {
             steps {
                 echo 'Compiling Java HelloWorld program...'
-                sh 'javac HelloWorld.java'
+                sh 'javac $WORKSPACE/HelloWorld.java'
+                sh 'java -cp $WORKSPACE HelloWorld'
+
             }
         }
         stage('Run Java Program') {
