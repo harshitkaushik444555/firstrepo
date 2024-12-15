@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building the project...'
+                echo 'Harshit is Building the project...'
                 sh 'mkdir -p build && echo "Build successful" > build/status.txt'
             }
         }
