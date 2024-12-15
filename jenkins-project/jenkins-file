@@ -14,7 +14,8 @@ pipeline {
         stage('Compile Java Code') {
             steps {
                 echo 'Compiling Java HelloWorld program...'
-                sh 'javac src/main/java/HelloWorld.java'
+                sh 'cd javac src/main/java'
+                sh 'javac HelloWorld.java'
 
             }
         }
