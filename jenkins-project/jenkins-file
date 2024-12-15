@@ -1,27 +1,16 @@
 pipeline {
-    agent {
-        agent {
+agent {
         docker { image 'maven:3.8.1-adoptopenjdk-11' }
       }
-    
-}
     stages {
-        stage('Checkout Code') {
+        stage('Build') {
             steps {
-                echo 'Checking out source code...'
-                checkout scm
+                sh 'mvn clean compile' 
             }
         }
-        stage('Compile') {
+        stage('Test') { 
             steps {
-                echo 'Compiling the HelloWorld program...'
-                sh 'javac src/main/java/HelloWorld.java'
-            }
-        }
-        stage('Run') {
-            steps {
-                echo 'Running the HelloWorld program...'
-                sh 'java -cp src/main/java HelloWorld'
+                sh 'mvn test' 
             }
         }
     }
