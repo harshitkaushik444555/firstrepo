@@ -4,7 +4,9 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Harshit is Building the project...'
-                sh 'mkdir -p build && echo "Build successful" > build/status.txt'
+                sh '''mkdir harry
+                      cd harry
+                      touch name.txt'''
             }
         }
         stage('Test') {
