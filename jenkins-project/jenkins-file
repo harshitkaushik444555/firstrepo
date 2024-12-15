@@ -1,35 +1,17 @@
 pipeline {
     agent any
-
     stages {
-        stage('Build Docker Image') {
+        stage('Build') {
             steps {
-                script {
-                    // Define the image name
-                    def imageName = "harshit-image"
-                    
-                    // Build the Docker image
-                    sh "docker build -t ${imageName} ."
-                }
+                echo 'Building the project...'
+                sh 'mkdir -p build && echo "Build successful" > build/status.txt'
             }
         }
-
-        stage('Run Docker Container') {
+        stage('Test') {
             steps {
-                script {
-                    // Run the Docker container
-                    sh "docker run -d --name harshit-ka-container ${imageName}"
-                }
+                echo 'Testing the project...'
+                sh 'cat build/status.txt'
             }
-        }
-    }
-
-    post {
-        always {
-            // Clean up any resources, if needed
-            echo 'Cleaning up...'
-            sh "docker rm -f harshit-ka-container || true"
-            sh "docker rmi harshit-image || true"
         }
     }
 }
