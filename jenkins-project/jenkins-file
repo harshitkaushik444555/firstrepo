@@ -4,15 +4,18 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Harshit is Building the project...'
-                sh '''mkdir harry
-                      cd harry
-                      touch name.txt'''
+                sh '''
+                    echo "Hello, Jenkins Pipeline!"
+                    mkdir -p output
+                    echo "This is a simple shell script." > output/result.txt
+                    cat output/result.txt
+                '''
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing the project...'
-                sh 'cat build/status.txt'
+                
             }
         }
     }
