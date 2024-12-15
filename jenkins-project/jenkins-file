@@ -11,23 +11,17 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Check Workspace') {
-            steps {
-                sh 'ls -l'
-            }
-        }
         stage('Compile Java Code') {
             steps {
                 echo 'Compiling Java HelloWorld program...'
-                sh 'javac $WORKSPACE/HelloWorld.java'
-                sh 'java -cp $WORKSPACE HelloWorld'
+                sh 'javac src/main/java/HelloWorld.java'
 
             }
         }
         stage('Run Java Program') {
             steps {
                 echo 'Running the Java program...'
-                sh 'java HelloWorld'
+                sh 'java -cp src/main/java HelloWorld'
             }
         }
     }
