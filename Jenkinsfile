@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'maven:latest'
+            image 'abhishekf5/maven-abhishek-docker-agent:v1'
         }
     }
 
